@@ -28,30 +28,31 @@ use clap::{Arg, App};
 
 fn main() {
     let matches = App::new("myapp")
-    					   .version("0.1.0")
-    					   .author("Erich Cordoba")
-    					   .about("Arithmetic operations between two numbers")
-    					   .arg(Arg::with_name("num1")
-    					   	    .short("n")
-    					   	    .long("num1")
-    					   	    .value_name("n")
-    					   	    .help("The first number")
-    					   	    .takes_value(true)
-    					   	    .required(true))
-    					   .arg(Arg::with_name("num2")
-    					   	    .short("m")
-    					   	    .long("num2")
-    					   	    .value_name("m")
-    					   	    .help("The second number")
-    					   	    .takes_value(true)
-    					   	    .required(true))
-    					   .get_matches();
+					.version("0.1.0")
+					.author("Erich Cordoba")
+					.about("Arithmetic operations between two numbers")
+					.arg(Arg::with_name("num1")
+						.short("n")
+						.long("num1")
+						.value_name("n")
+						.help("The first number")
+						.takes_value(true)
+    					.required(true))
+					.arg(Arg::with_name("num2")
+						.short("m")
+						.long("num2")
+						.value_name("m")
+						.help("The second number")
+						.takes_value(true)
+						.required(true))
+					.get_matches();
 
     let n = value_t!(matches.value_of("num1"), i32).unwrap();
     let m = value_t!(matches.value_of("num2"), i32).unwrap();
 
     println!("{} + {} = {}", n, m, n + m);
 }
+
 ```
 
 The first section enabled the use of clap crate in our program. We tell the compiler that we will use macros from `clap` and also the Arg and App components will be used.
@@ -65,24 +66,24 @@ This section defines the options an arguments.
 
 ```rust
 let matches = App::new("myapp")
-             .version("0.1.0")
-             .author("Erich Cordoba")
-             .about("Arithmetic operations between two numbers")
-             .arg(Arg::with_name("num1")
-                  .short("n")
-                  .long("num1")
-                  .value_name("n")
-                  .help("The first number")
-                  .takes_value(true)
-                  .required(true))
-             .arg(Arg::with_name("num2")
-                  .short("m")
-                  .long("num2")
-                  .value_name("m")
-                  .help("The second number")
-                  .takes_value(true)
-                  .required(true))
-             .get_matches();
+      .version("0.1.0")
+      .author("Erich Cordoba")
+      .about("Arithmetic operations between two numbers")
+      .arg(Arg::with_name("num1")
+        .short("n")
+        .long("num1")
+        .value_name("n")
+        .help("The first number")
+        .takes_value(true)
+          .required(true))
+      .arg(Arg::with_name("num2")
+        .short("m")
+        .long("num2")
+        .value_name("m")
+        .help("The second number")
+        .takes_value(true)
+        .required(true))
+      .get_matches();
 ```
 
 This will be used to get help message when run with `--help`.
