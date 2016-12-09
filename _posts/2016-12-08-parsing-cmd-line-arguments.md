@@ -21,7 +21,7 @@ clap = "2.19.2"
 
 The code
 
-```rust-lang
+```rust
 #[macro_use] extern crate clap;
 
 use clap::{Arg, App};
@@ -56,14 +56,14 @@ fn main() {
 
 The first section enabled the use of clap crate in our program. We tell the compiler that we will use macros from `clap` and also the Arg and App components will be used.
 
-```rust-lang
+```rust
 #[macro_use] extern crate clap;
 
 use clap::{Arg, App};
 ```
 This section defines the options an arguments.
 
-```rust-lang
+```rust
 let matches = App::new("myapp")
              .version("0.1.0")
              .author("Erich Cordoba")
