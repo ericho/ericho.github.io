@@ -9,6 +9,7 @@ Command line parsing is needed on every program that receives parameters from th
 As an example this is a really simple application that takes two numbers from the command line and return the sum of them.
 
 The Cargo.toml content
+
 ```
 [package]
 name = "cmd_parser"
