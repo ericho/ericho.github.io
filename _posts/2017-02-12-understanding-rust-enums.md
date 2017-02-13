@@ -35,9 +35,11 @@ fn guessAnimal(a: Animal) {
    match a {
    	 Animal::Cat => println!("It's a cat!")
 	 Animal::Dog => println!("It's a dog!")
-	 Fish(i) => println!("It's a fish with {} eyes", i)
+	 Animal::Fish(i) => println!("It's a fish with {} eyes", i)
    }
 }
 ```
 
 With `match` we can identify the variant of a enum and proceed accordingly.
+
+Enums are useful to determine the result of a operation, and that's is why `Result<T, E>` exists. Imagine that we want to know if something went wront, what actually was the problem with a detailed string message, for instance.
