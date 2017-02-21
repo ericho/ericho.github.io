@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Modify type elements with interfaces
+title: Modify type elements with Golang interfaces
 date: 2017-02-20
 ---
 
