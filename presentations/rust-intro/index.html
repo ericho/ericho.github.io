@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Introducción a Rust</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/eou.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		  <div class="reveal eou">
+			  <div class="slides">
+            <section style="height: 100%;">
+                <h2>Introducción a Rust</h2>
+                <img src="images/rust-logo-white.svg" style="height: 40%;">
+                <div>Erich Córdoba</div>
+                <div>Twitter: @ericho</div>
+                <div>erich@mastodon.social</div>
+                <div><p>Presentación: http://github.com/ericho/rust-intro.git</p></div>
+            </section>
+
+            <section>
+            <section style="height: 100%;">
+                <h2>¿Qué es Rust?</h2>
+                <blockquote>
+                    Rust es un lenguaje de programación de sistemas
+                    extremadamente
+                    rápido, previene fallas de segmentación y garantiza
+                    la seguridad de los hilos de ejecución.
+                </blockquote>
+                <cite>https://www.rust-lang.org/es-ES/</cite>
+            </section>
+            <section style="height: 100%;">
+                <h2>Lenguaje de programación de sistemas</h2>
+                <ul>
+                    <li>Lenguaje utilizado para crear sistemas.</li>
+                    <li>Software que provee servicios a otros programas</li>
+                    <li>Sistemas operativos, motores de juegos, automatización industrial, etc</li>
+                    <li>C, C++, Swift, D, Go</li>
+                </ul>
+            </section>
+            <section style="height: 100%">
+                <h2>Extremádamente rápido</h2>
+                <ul>
+                    <li>Lenguaje compilado</li>
+                    <li>No necesita recolector de basura</li>
+                    <li>Abstracciones sin costo</li>
+                    <li>Competitivo con C/C++ (incluso mejor en algunos casos)</li>
+                </ul>
+            </section>
+            <section style="height: 100%">
+                <h2>Previene fallas de segmentación</h2>
+                <ul>
+                    <li>No hay fallas de segmentación</li>
+                    <li>No hay punteros nulos </li>
+                    <li>No hay punteros inválidos</li>
+                </ul>
+            </section>
+            <section style="height: 100%">
+                <h2>Seguridad de los hilos de ejecución</h2>
+                <ul>
+                    <li>Previene condiciones de carrera de datos (data-races)</li>
+                    <li>Sólo puede haber un dueño de los datos al mismo tiempo</li>
+                </ul>
+            </section>
+            </section>
+            <section>
+                <section>
+                    <h2>¡Hola mundo!</h2>
+                    <pre><code class="rust">
+fn main() {
+    println!("¡Hola mundo!");
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>¡Hola compilador!</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+fn main() {
+    let s = String::from("¡Hola mundo!");
+    let a = s;
+    println!("{}", a);
+    println!("{}", b);
+}
+                    </code></pre>
+                    <span class="fragment">
+                        <pre><code>
+error[E0382]: use of moved value: `s`
+ --> foo.rs:5:20
+     |
+     3 |     let a = s;
+     |         - value moved here
+     4 |     println!("{}", a);
+     5 |     println!("{}", s);
+     |                    ^ value used here after move
+                        </code></pre></span>
+                </section>
+                <section>
+                    <h2>Propiedad y préstamo</h2>
+                    <h4>Ownership and borrowing</h4>
+                    <ul>
+                        <li>Es la base del manejo de memoria</li>
+                        <li>Cada valor tiene exáctamente un dueño</li>
+                        <li>Las variables se mueven a nuevas localidades, previniendo que las anteriores las usen</li>
+                        <li>Lo que tienes, lo puedes prestar</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Propiedad y préstamo</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+fn main() {
+    let s = String::from("¡Hola mundo!");
+    let a = &s;
+    println!("{}", a);
+    println!("{}", b);
+}
+
+                    </code></pre>
+                    <a href="https://is.gd/c6UpFG">Pruébalo</a>
+                </section>
+                <section>
+                    <h2>¡Hola compilador! (v2)</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+fn main() {
+    let s = 5;
+    s = s + 1;
+    println!("{}", s);
+}
+                    </code></pre>
+                    <span class="fragment">
+                        <pre><code>
+error[E0384]: re-assignment of immutable variable `s`
+ --> foo.rs:3:5
+  |
+  2 |     let s = 5;
+  |         - first assignment to `s`
+  3 |     s = s + 1;
+  |     ^^^^^^^^^ re-assignment of immutable variable
+                        </code></pre></span>
+                </section>
+                <section>
+                    <h2>Variables inmutables por defecto</h2>
+                    <ul>
+                        <li>Cualquier variable (o binding) es inmutable.</li>
+                        <li>Si queremos que cambie en el futuro hay que marcarlo explícitamente.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Variables inmutables por defecto</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+fn main() {
+    let mut s = 5;
+    s = s + 1;
+    println!("{}", s);
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Propiedad y préstamo de valores mutables</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+fn add_one(x: &mut i32) {
+    *x = *x + 1
+}
+
+fn main() {
+    let mut s = 5;
+    add_one(&mut s);
+    println!("{}", s);
+}
+                    </code></pre>
+                    <a href="https://is.gd/LPTkXZ">Pruébalo</a>
+                </section>
+                <section>
+                    <h2>Operaciones inseguras</h2>
+                    <ul>
+                        <li>Rust no deja hacer cosas malas si se lo pedimos.</li>
+                        <li>El compilador ignorará una sección de código si está marcada como "unsafe"</li>
+                        <li>Útil para hablar con componentes hecho en otros lenguajes.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Usando unsafe</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+fn main() {
+    let raw_p: *const u32 = &10;
+
+    unsafe {
+        assert!(*raw_p == 10);
+    }
+}
+                    </code></pre>
+                </section>
+            </section>
+				    <section>
+                <section>
+                    <h2>El paradigma de Rust</h2>
+                    <ul>
+                        <li>Es un lenguaje multiparadigma</li>
+                        <li>Hay elementos de POO, programación funcional, estructurada, etc</li>
+                        <li>Se dice que Rust tiene su propio paradigma</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Lo mio es la POO, ¿Rust me sirve?</h2>
+                    <ul>
+                        <li>Puedes hacer casi todo lo mismo que con POO</li>
+                        <li>Puede ser diferente a lo que estás acostumbrad@</li>
+                        <li>Tienes datos y comportamiento, encapsulamiento, herencia, entre otros.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Una estructura y métodos</h2>
+                    <pre><code class="rust" data-trim data-noescape>
+pub struct AveragedCollection {
+    list: Vec&lti32&gt,
+    average: f64,
+}
+
+impl AveragedCollection {
+    pub fn add(&mut self, value: i32) {
+        self.list.push(value);
+        self.update_average();
+    }
+    pub fn average(&self) -> f64 {
+        self.average
+    }
+
+    fn update_average(&mut self) {
+        let total: i32 = self.list.iter().sum();
+        self.average = total as f64 / self.list.len() as f64;
+    }
+}
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>La interfaz de funciones foráneas (FFI)</h2>
+                    <ul>
+                        <li>¡Paren todo, vamos a rehacerlo en Rust! &lt- Probablemente una mala idea</li>
+                        <li>Rust puede platicar con otros lenguajes.</li>
+                        <li>Si tu lenguaje habla con C, puede hablar con Rust</li>
+                        <li>Ejemplo, <a href="https://blog.sentry.io/2016/10/19/fixing-python-performance-with-rust.html">arreglar el desempeño de Python con Rust</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Portando código a Rust incrementálmente</h2>
+                    <ul>
+                        <li>Tengo un viejo programa en C que quiero pasar a Rust</li>
+                        <li>Usa la FFI</li>
+                        <li>Refactoriza, pasa tu función a Rust y recompila.</li>
+                    </ul>
+                    <a href="https://github.com/carols10cents/rust-out-your-c-talk">Rust out your C</a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>¿Hay librerías en Rust?</h2>
+                    <ul>
+                        <li><a href="https://doc.rust-lang.org/std/">La librerìa estándar</a> tiene soporte para muchas cosas.</li>
+                        <li>Para todo lo demás existen los <a href="https://crates.io/">crates</a></li>
+                        <li>9k crates disponibles</li>
+                    </ul>
+                </section>
+            </section>
+				    <section>
+                <section>
+                    <h3>¿Por qué debería aprender Rust?</h3>
+                    <ul>
+                        <li>Pinta a ser el futuro en la programación de sistemas (y en otras muchas áreas)</li>
+                        <li>Te hace un mejor desarrollador</li>
+                        <li>Lenguaje más querido en la encuesta de stackoverflow de los dos últimos años</li>
+                        <li>Conocer como es un lenguaje moderno. (no es un lenguaje hipster, hipster es usar lo mismo de hace 15 años)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>No me dedico a programar sistemas</h2>
+                    <h3>¿De qué me sirve Rust?</h3>
+                    <ul>
+                        <li>Rust acerca la programación de sistemas a cualquier desarrollador.</li>
+                        <li>Te obliga a pensar diferente</li>
+                        <li>"¿Hasta dónde vivirá este cacho de memoria?"</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>¿Quién usa Rust?</h2>
+                    <ul>
+                        <li>Mozilla, Dropbox, NPM, entre muchos otros</li>
+                        <li><a href="https://www.rust-lang.org/en-US/friends.html">Lista completa</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>La comunidad de Rust</h2>
+                    <ul>
+                        <li>Es una comunidad amigable y abierta</li>
+                        <li>Se nota que aman hacer esto</li>
+                        <li>Siempre dispuestos a ayudar y orientarte</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Proyectos interesantes</h2>
+                    <ul>
+                        <li><a href="https://www.redox-os.org/">Redox</a>: Un sistema operativo hecho en Rust</li>
+                        <li><a href="https://rocket.rs/">Rocket</a>: Un web framework</li>
+                        <li><a href="http://diesel.rs/">Diesel</a>: Un ORM y generador de consultas</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Recursos</h2>
+                    <ul>
+                        <li><a href="https://doc.rust-lang.org/book/">El libro</a>: El libro de Rust</li>
+                        <li><a href="https://doc.rust-lang.org/nomicon/">Rustonomicon</a>: El libro sobre las artes oscuras de Rust</li>
+                        <li><a href="https://users.rust-lang.org/">Foro de usuarios</a>: El principal foro de Rust</li>
+                        <li><a href="https://www.reddit.com/r/rust/">Reddit</a>: El subreddit de Rust</li>
+                        <li><a href="https://rustbyexample.com/">Rust con ejemplos</a>: Muchos ejemplos de Rust</li>
+                        <li><a href="http://exercism.io/languages/rust/about">Exercism en Rust</a>: Un curso de Rust</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <h1>¡Gracias!</h1>
+            </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				],
+          transition: "convex"
+			});
+		</script>
+	</body>
+</html>
