@@ -125,5 +125,6 @@ And you can use `gdb` freely.
 ## Drawbacks
 
 Here are some possible problems using this mode: 
+
     1. The image size is huge: As there is a lot of dependencies installed it's expected to have big images.
     2. I only testing this mode in Linux, I tried in Windows 10 using the Linux subsystem, but unfortunately, sharing folders between Linux and Windows doesn't work as expected.
