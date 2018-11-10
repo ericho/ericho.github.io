@@ -4,7 +4,7 @@ title: "Using docker as building environment"
 date: 2018-02-01
 ---
 
-The normal usage of docker is to be used as a container of an application. That's great because you can have all the dependencies inside the container and then just run that as a another command. Also, docker can be used as a container of dependencies to build software. This usage can be seen in Travis CI, for example, sometime ago I worked to [enable a C/C++ project in Travis CI](https://travis-ci.org/intel-ctrlsys/sensys) with a [nightmare of dependencies involved](https://github.com/intel-ctrlsys/infra-helpers/blob/master/Dockerfiles/sensys-bld/Dockerfile). I solved that by creating a Dockerfile with all the dependencies needed and then build the software inside the container.
+The normal usage of docker is to be used as a container for an application. That's great because you can have all the dependencies inside the container and then just run that as a another command. Also, docker can be used as a container of dependencies to build software. This usage can be seen in Travis CI, for example, sometime ago I worked to [enable a C/C++ project in Travis CI](https://travis-ci.org/intel-ctrlsys/sensys) with a [nightmare of dependencies involved](https://github.com/intel-ctrlsys/infra-helpers/blob/master/Dockerfiles/sensys-bld/Dockerfile). I solved that by creating a Dockerfile with all the dependencies needed and then build the software inside the container.
 
 But, can we use the same building model from our development systems? And yes, of course is possible!. Imagine you have Fedora (as my case) or macOS or even Windows and you need to develop and test software for CentOS 7.2/7.3 and openSUSE. You can achieve this with docker. In the following sections I'll describe how to setup a docker image to build C++17 software under CentOS 7.3.
 
@@ -42,10 +42,11 @@ Successfully built af466b33ba83
 
 ## Running the image
 
-The proposed workflow here would be,
-    1. To have a folder with the source code.
-    2. Run `/bin/bash` from the container and share that folder with the host system.
-    3. Build our program inside the container.
+The proposed workflow here would be:
+
+1. To have a folder with the source code.
+2. Run `/bin/bash` from the container and share that folder with the host system.
+3. Build our program inside the container.
     
 ### Disable SELinux
 
@@ -125,6 +126,5 @@ And you can use `gdb` freely.
 ## Drawbacks
 
 Here are some possible problems using this mode: 
-
-    1. The image size is huge: As there is a lot of dependencies installed it's expected to have big images.
-    2. I only testing this mode in Linux, I tried in Windows 10 using the Linux subsystem, but unfortunately, sharing folders between Linux and Windows doesn't work as expected.
+1. The image size is huge: As there is a lot of dependencies installed it's expected to have big images.
+2. I only testing this mode in Linux, I tried in Windows 10 using the Linux subsystem, but unfortunately, sharing folders between Linux and Windows doesn't work as expected.
