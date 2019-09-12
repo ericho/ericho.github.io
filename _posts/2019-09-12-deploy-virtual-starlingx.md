@@ -113,13 +113,13 @@ Here we are telling the test suite to run the `Setup` section which creates the 
 
 If everything goes right, you should see something like this:
 
-![Launch test suite](img/stx-vid.webm)
+![Launch test suite](https://ericho.github.io/img/stx-vid.webm)
 
 Now we can wait until the installation completes. If you want to see more you can use `virt-manager` to see something like this:
 
-![virt-manager](img/stx-1.png)
+![virt-manager](https://ericho.github.io/img/stx-1.png)
 
-![virt-manager](img/stx-3.png)
+![virt-manager](https://ericho.github.io/img/stx-3.png)
 
 After `Setup` finishes we need to run the `Provision` set. 
 
@@ -129,7 +129,7 @@ After `Setup` finishes we need to run the `Provision` set.
 
 This may take a while to finish, depending on your Internet speed connection. In this process a set of containers will be downloaded. After the finished you should be able to load the StarlingX admin interface. 
 
-![Starlingx admin page](img/stx-4.png)
+![Starlingx admin page](https://ericho.github.io/img/stx-4.png)
 
-![Starlingx host inventory](img/stx-5.png)
+![Starlingx host inventory](https://ericho.github.io/img/stx-5.png)
 
