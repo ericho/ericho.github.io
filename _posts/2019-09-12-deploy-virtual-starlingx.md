@@ -113,7 +113,7 @@ Here we are telling the test suite to run the `Setup` section which creates the 
 
 If everything goes right, you should see something like this:
 
-![Launch test suite](https://ericho.github.io/img/stx-vid.webm)
+![Launch test suite](https://ericho.github.io/img/stx-vid.gif)
 
 Now we can wait until the installation completes. If you want to see more you can use `virt-manager` to see something like this:
 
