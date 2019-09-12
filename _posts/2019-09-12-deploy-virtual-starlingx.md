@@ -4,11 +4,11 @@ title: "Deploy a virtual StarlingX Simplex node"
 date: 2019-09-12
 ---
 
-I've been working in this project for one year and a half and has been a great experience in many ways. Currently the 2.0 was announced were some big changes and features were introduced.
+I've been working in this project for one year and a half and has been a great experience in many ways. Currently the [StarlingX 2.0 was announced](http://lists.starlingx.io/pipermail/starlingx-discuss/2019-September/005881.html), were some big changes and features were introduced.
 
-I install and deploy StarlingX almost every day to test the system and sometimes just to reinstall it when I broke it. Although the project is intended to be run in baremetal systems, it is possible to create virtual deployments for testing and evaluation purposes.
+I install and deploy [StarlingX](https://www.starlingx.io) almost every day to test the system and sometimes just to reinstall it when I broke it. Although the project is intended to be run in baremetal systems, it is possible to create virtual deployments for testing and evaluation purposes.
 
-The testing team has created a really cool test suite that deploys StarlingX in baremetal and virtual environments. In this post I'll explain how to use this test suite to deploy a Simplex StarlingX installation.
+The testing team has created a [really cool test suite](https://opendev.org/starlingx/test/src/branch/master/automated-robot-suite) that deploys StarlingX in baremetal and virtual environments. In this post I'll explain how to use this test suite to deploy a Simplex StarlingX installation.
 
 ## Requirements
 
