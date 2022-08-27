@@ -31,3 +31,4 @@ With all these terms, the following signals can be defined.
   - _Sampled-data signal_: A discrete-time signal with continuous-valued amplitudes. These signals can be found in switched capacitors circuits.
   - _Quantized boxcar signal_: A continuous-time signal with discrete-valued amplitudes. A clock in a circuit or data transmission over a wire can be examples of these signals.
 
+$$ \nabla_\boldsymbol{x} J(\boldsymbol{x}) $$
