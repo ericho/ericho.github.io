@@ -31,4 +31,6 @@ With all these terms, the following signals can be defined.
   - _Sampled-data signal_: A discrete-time signal with continuous-valued amplitudes. These signals can be found in switched capacitors circuits.
   - _Quantized boxcar signal_: A continuous-time signal with discrete-valued amplitudes. A clock in a circuit or data transmission over a wire can be examples of these signals.
 
-$$ \nabla_\boldsymbol{x} J(\boldsymbol{x}) $$
+Another signal classification depends on the certainty in which the signal can be uniquely described. A signal determined by a well-defined process is called a deterministic-signal. A signal generated randomly which cannot be predicted is called a random-signal.
+
+
